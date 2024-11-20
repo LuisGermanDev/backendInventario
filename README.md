@@ -15,7 +15,7 @@ mientras que los usuarios solo pueden consultar la lista de productos disponible
 1. Clona el repositorio:
 
    
-   git clone https://github.com/LuisGermanDev/roles.git
+   [git clone https://github.com/LuisGermanDev/roles.git](https://github.com/LuisGermanDev/backendInventario.git)
 
 2. ingresar al proyecto
 
