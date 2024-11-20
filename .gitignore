@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+
+# Dependencias de desarrollo
+npm-debug.log
+yarn-error.log
+
+# Archivos de entorno
+
+
+# Archivos de sistema de OS
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de cobertura de test
+coverage/
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos de compilación
+dist/
+build/
