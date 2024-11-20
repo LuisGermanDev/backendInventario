@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
     categoria: {
       type: String,
       required: [true, "La categoría del producto es obligatoria"],
-      enum: ["tecnología", "alimentos", "ropa", "hogar", "otros"], // Agrega más categorías si es necesario
+     // enum: ["tecnología", "alimentos", "ropa", "hogar", "otros"], 
     },
     precio: {
       type: Number,
