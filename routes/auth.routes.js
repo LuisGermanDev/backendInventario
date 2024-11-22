@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, loginUser } = require("../controllers/auth.controller");
+const { registerUser, loginUser, logoutUser } = require("../controllers/auth.controller");
 
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.post("/register", registerUser);
 
 // Ruta para iniciar sesión
 router.post("/login", loginUser);
+
+// Ruta para cerrar sesión
+router.post("/logout", logoutUser);
 
 module.exports = router;

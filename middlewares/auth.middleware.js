@@ -2,16 +2,31 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
 // Verificar token JWT
+// const protect = async (req, res, next) => {
+//   let token =
+//     req.headers.authorization && req.headers.authorization.startsWith("Bearer")
+//       ? req.headers.authorization.split(" ")[1]
+//       : null;
+
+//   if (!token) {
+//     return res
+//       .status(401)
+//       .json({ message: "No autorizado, token no encontrado" });
+//   }
+
+//   try {
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.user = await User.findById(decoded.id).select("-password");
+//     next();
+//   } catch (error) {
+//     res.status(401).json({ message: "Token inválido" });
+//   }
+// };
 const protect = async (req, res, next) => {
-  let token =
-    req.headers.authorization && req.headers.authorization.startsWith("Bearer")
-      ? req.headers.authorization.split(" ")[1]
-      : null;
+  const token = req.cookies.sesionID; // Obtener token desde la cookie
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ message: "No autorizado, token no encontrado" });
+    return res.status(401).json({ message: "No autorizado, token no encontrado" });
   }
 
   try {

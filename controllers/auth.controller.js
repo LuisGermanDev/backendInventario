@@ -21,6 +21,34 @@ const registerUser = async (req, res) => {
 };
 
 // Iniciar sesión
+// const loginUser = async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try {
+//     Verificar si el usuario existe
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.status(404).json({ message: "Usuario no encontrado" });
+//     }
+
+//      Verificar la contraseña
+//     const isMatch = await user.matchPassword(password);
+//     if (!isMatch) {
+//       return res.status(401).json({ message: "Contraseña incorrecta" });
+//     }
+
+//      Generar un token JWT
+//     const token = jwt.sign(
+//       { id: user._id, rol: user.rol },
+//       process.env.JWT_SECRET,
+//       { expiresIn: "1d" }
+//     );
+
+//     res.status(200).json({ token, rol: user.rol });
+//   } catch (error) {
+//     res.status(500).json({ message: "Error al iniciar sesión", error });
+//   }
+// };
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -40,14 +68,27 @@ const loginUser = async (req, res) => {
     // Generar un token JWT
     const token = jwt.sign(
       { id: user._id, rol: user.rol },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      process.env.JWT_SECRET
     );
 
-    res.status(200).json({ token, rol: user.rol });
+    // Establecer la cookie sin fecha de expiración (sesión)
+    res.cookie("sesionID", token, {
+      httpOnly: true, // Solo accesible desde el servidor
+      secure: process.env.NODE_ENV === "production", // Solo en HTTPS en producción
+      sameSite: "Strict", // Protección contra CSRF
+      path: "/", // Disponible en todas las rutas
+    });
+
+    res.status(200).json({ message: "Inicio de sesión exitoso", rol: user.rol });
   } catch (error) {
     res.status(500).json({ message: "Error al iniciar sesión", error });
   }
 };
+const logoutUser = (req, res) => {
+  res.clearCookie("sesionID", {
+    path: "/", // Debe coincidir con el path de la cookie original
+  });
+  res.status(200).json({ message: "Sesión cerrada exitosamente" });
+};
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser ,logoutUser};
