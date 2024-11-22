@@ -5,16 +5,16 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/product.controller");
-const { protect, admin } = require("../middlewares/auth.middleware");
+const { protect, rolesPermitidos } = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
 // Ruta protegida para listar productos (solo usuarios autenticados)
-router.get("/", protect, getProducts); // Ahora solo accesible por usuarios autenticados
+router.get("/", protect, rolesPermitidos("admin","usuario"), getProducts); // Ahora solo accesible por usuarios autenticados
 
 // Rutas protegidas (solo admin)
-router.post("/", protect, admin, createProduct); // Crear producto
-router.put("/:id", protect, admin, updateProduct); // Actualizar producto
-router.delete("/:id", protect, admin, deleteProduct); // Eliminar producto
+router.post("/", protect, rolesPermitidos("admin"), createProduct); // Crear producto
+router.put("/:id", protect, rolesPermitidos("admin"), updateProduct); // Actualizar producto
+router.delete("/:id", protect, rolesPermitidos("admin"), deleteProduct); // Eliminar producto
 
 module.exports = router;
