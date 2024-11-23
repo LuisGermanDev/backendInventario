@@ -1,4 +1,4 @@
-# API de Gestión de Productos
+# API de Gestión de Productos USANDO COOKIES
 
 ## Descripción
 Esta es una API REST para la gestión de productos, con autenticación de usuarios mediante JWT.
@@ -93,12 +93,17 @@ USUARIO
     "email": "luis@gmail.com",
     "password": "123456"
 }
+# 1.3 Cerrar sesion
+el usuario puede cerrar
+
+URL: http://localhost:5000/api/auth/logout
+
 
 # 2. Productos
 2.1 Crear un nuevo producto (solo admin)
 Método: POST
 
-URL: /api/products
+URL: http://localhost:5000/api/products
 
 Headers:
 
@@ -209,5 +214,4 @@ Respuesta esperada:
 {
     "message": "Acceso denegado, se requiere rol de administrador"
 }
-
 
