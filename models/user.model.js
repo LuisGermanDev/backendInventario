@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-// Esquema del Usuario
 const userSchema = new mongoose.Schema({
   nombre: {
     type: String,
@@ -25,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   rol: {
     type: String,
-    enum: ["admin", "gerente","tecnico"],
+    enum: ["admin", "gerente", "tecnico"],
     default: "tecnico", // Por defecto, el rol es "usuario"
   },
 });
@@ -46,6 +45,6 @@ userSchema.methods.matchPassword = async function (password) {
 };
 
 // Modelo de Usuario
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("user", userSchema);  // Asegúrate de usar "user" en minúscula
 
 module.exports = User;
