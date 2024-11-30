@@ -16,9 +16,9 @@ app.use(express.json()); // Manejar JSON en las solicitudes
 app.use(cors()); // Habilitar CORS para todas las solicitudes
 
 // Rutas
-app.use("/api/auth", require("./routes/auth.routes")); // Rutas de autenticación
-app.use("/api/products", require("./routes/product.routes")); // Rutas de productos
-
+app.use("/users", require("./routes/auth.routes")); // Rutas de autenticación
+app.use("/items", require("./routes/item.routes")); // Rutas de productos
+app.use("/reportes",require("./routes/reporte.routes"))
 // Ruta inicial de prueba
 app.get("/", (req, res) => {
   res.send("¡API funcionando!");

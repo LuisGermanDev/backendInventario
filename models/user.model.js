@@ -25,8 +25,8 @@ const userSchema = new mongoose.Schema({
   },
   rol: {
     type: String,
-    enum: ["admin", "usuario"],
-    default: "usuario", // Por defecto, el rol es "usuario"
+    enum: ["admin", "gerente","tecnico"],
+    default: "tecnico", // Por defecto, el rol es "usuario"
   },
 });
 

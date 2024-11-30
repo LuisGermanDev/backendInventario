@@ -20,35 +20,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Iniciar sesión
-// const loginUser = async (req, res) => {
-//   const { email, password } = req.body;
 
-//   try {
-//     Verificar si el usuario existe
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       return res.status(404).json({ message: "Usuario no encontrado" });
-//     }
-
-//      Verificar la contraseña
-//     const isMatch = await user.matchPassword(password);
-//     if (!isMatch) {
-//       return res.status(401).json({ message: "Contraseña incorrecta" });
-//     }
-
-//      Generar un token JWT
-//     const token = jwt.sign(
-//       { id: user._id, rol: user.rol },
-//       process.env.JWT_SECRET,
-//       { expiresIn: "1d" }
-//     );
-
-//     res.status(200).json({ token, rol: user.rol });
-//   } catch (error) {
-//     res.status(500).json({ message: "Error al iniciar sesión", error });
-//   }
-// };
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
