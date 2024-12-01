@@ -40,12 +40,6 @@ const getReportesTecnico = async (req, res) => {
   }
 };
 
-
-
-
-
-
-  
 // Crear un nuevo reporte
 const createReporte = async (req, res) => {
   const { materialesUsados } = req.body;
@@ -53,23 +47,47 @@ const createReporte = async (req, res) => {
 
   try {
     // Verificar el límite diario de materiales del técnico
-    const limite = await LimiteDiario.findOne({ id_tecnico: id_usuario, fecha: new Date().toISOString().split('T')[0] }); // Solo el día de hoy
+    const limite = await LimiteDiario.findOne({
+      id_tecnico: id_usuario,
+      fecha: new Date().toISOString().split('T')[0], // Solo el día de hoy
+    });
 
     if (!limite) {
       return res.status(400).json({ message: "No se ha asignado un límite diario para este técnico" });
     }
 
-    // Verificar si la cantidad de cada material usado excede el límite
-    for (let material of materialesUsados) {
+    // Obtener los reportes previos del técnico en el día de hoy
+    const reportesPrevios = await Reporte.find({ id_usuario, createdAt: { $gte: new Date().setHours(0, 0, 0, 0) } });
+
+    // Calcular el total de materiales usados por el técnico en el día
+    let totalMaterialUsado = 0;
+    reportesPrevios.forEach(reporte => {
+      reporte.materialesUsados.forEach(material => {
+        totalMaterialUsado += material.cantidad;
+      });
+    });
+
+    // Calcular el total de materiales usados con los nuevos materiales
+    materialesUsados.forEach(material => {
+      totalMaterialUsado += material.cantidad;
+    });
+
+    // Verificar si el total de materiales usados excede el límite
+    let excedeLimite = false;
+    materialesUsados.forEach(material => {
       const materialLimitado = limite.materialesAsignados.find(item => item.id_item.toString() === material.id_item);
-      if (materialLimitado && material.cantidad > materialLimitado.cantidadMaxima) {
-        return res.status(400).json({
-          message: `La cantidad de ${material.id_item} excede el límite permitido para hoy`,
-        });
+      if (materialLimitado && totalMaterialUsado > materialLimitado.cantidadMaxima) {
+        excedeLimite = true;
       }
+    });
+
+    if (excedeLimite) {
+      return res.status(400).json({
+        message: "El total de materiales usados excede el límite permitido para hoy",
+      });
     }
 
-    // Crear el reporte si todo está en orden
+    // Crear el reporte si el límite no se excede
     const nuevoReporte = new Reporte({
       id_usuario,
       materialesUsados,
@@ -81,24 +99,6 @@ const createReporte = async (req, res) => {
     res.status(500).json({ message: "Error al crear el reporte", error });
   }
 };
-// const createReporte = async (req, res) => {
-//   const { materialesUsados } = req.body;  // Ahora no necesitamos `id_usuario`, ya lo obtenemos del token
-
-//   try {
-//     const id_usuario = req.user._id;  // Extraemos el `id_usuario` del usuario autenticado desde el token JWT
-
-//     const nuevoReporte = new Reporte({
-//       id_usuario,  // El usuario que crea el reporte
-//       materialesUsados,  // Arreglo con id_item y cantidad
-//     });
-
-//     await nuevoReporte.save();
-
-//     res.status(201).json({ message: "Reporte creado exitosamente", nuevoReporte });
-//   } catch (error) {
-//     res.status(500).json({ message: "Error al crear el reporte", error });
-//   }
-// };
 
 
 // Actualizar un reporte por ID
