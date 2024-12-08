@@ -20,6 +20,7 @@ app.use("/users", require("./routes/auth.routes")); // Rutas de autenticación
 app.use("/items", require("./routes/item.routes")); // Rutas de productos
 app.use("/reportes",require("./routes/reporte.routes"))
 app.use("/limite",require("./routes/limiteDiario.routes"))
+app.use("/allusers", require("./routes/user.routes"))
 
 // Ruta inicial de prueba
 app.get("/", (req, res) => {
