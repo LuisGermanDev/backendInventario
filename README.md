@@ -1,10 +1,62 @@
 # API de Gestión de Productos
 
 ## Descripción
-Esta es una API REST para la gestión de productos, con autenticación de usuarios mediante JWT.
-Los usuarios pueden registrarse, iniciar sesión y consultar productos. Los administradores pueden crear, actualizar y eliminar productos,
-mientras que los usuarios solo pueden consultar la lista de productos disponibles.
+Esta aplicacion creada para una empresa de telecomunicaciones de conepcion de cable e internet entre otros en la cual veneficiara en el area de gestion de stock de tecicos , en donde el administrador o el gerente necesita un informe o conocer cuantos trabajos realizan un tecnicos, cuantos materiales gastan en una jornada y que el pueda agregarle una cierta cantidad para que pueda ser usada durente el dia.
+con esta informacion el gerente podra anticipar y preparar nueva solicitud para el almacen y poder adquirir nuevo material para el nuevo dia.
+optimizando hacie el metodo tradicional de que cada tecnico rellene un formulario a papel y este se entregado el final del dia para que el sercretario traspase todos esos datos a un documento excel y este al fin sea entregado al gerente.
+## JUSTIFICACION
+### Justificación del Proyecto: API de Gestión de Productos
 
+El desarrollo de la **API de Gestión de Productos** tiene como objetivo optimizar y automatizar la gestión de inventarios y el control de materiales dentro de una empresa de telecomunicaciones, específicamente en el área de gestión de stock para técnicos. La solución proporcionada se enfoca en facilitar la administración de materiales, mejorar la eficiencia en la asignación de recursos y la creación de reportes, eliminando procesos manuales que generan ineficiencias y errores.
+
+#### Necesidad y Problema
+
+En muchas empresas de telecomunicaciones, los técnicos suelen registrar manualmente el uso de materiales durante su jornada laboral en formularios en papel, los cuales deben ser entregados al final del día para ser procesados por el personal administrativo. Este proceso tradicional tiene varias desventajas:
+- **Ineficiencia**: El tiempo empleado en completar formularios a mano y luego transcribirlos a una hoja de cálculo es considerable.
+- **Errores humanos**: La transcripción manual puede generar errores que afectan la precisión de la información.
+- **Retrasos en la toma de decisiones**: Los informes solo se generan al final del día, lo que retrasa las decisiones sobre reabastecimiento de inventarios o la planificación de tareas.
+
+La API propuesta resuelve estos problemas al digitalizar todo el proceso y permitir a los técnicos y gerentes acceder y actualizar información de forma rápida y precisa, en tiempo real.
+
+#### Beneficios
+
+1. **Optimización de procesos**: La API automatiza la gestión de inventarios, eliminando la necesidad de transcribir datos manualmente a Excel. Los técnicos pueden registrar el uso de materiales a través de la interfaz digital, y los gerentes pueden acceder a los reportes de manera inmediata.
+   
+2. **Acceso en tiempo real**: Los gerentes y administradores pueden obtener información actualizada sobre el uso de materiales por parte de los técnicos y la cantidad de trabajo realizado, lo que facilita la toma de decisiones sobre reposición de inventarios sin tener que esperar al final del día.
+
+3. **Gestión eficiente de inventarios**: La asignación de límites de materiales a los técnicos según sus necesidades diarias permite tener un control más efectivo sobre los recursos disponibles, evitando el desabastecimiento o el exceso de materiales sin usar.
+
+4. **Reducción de errores**: El uso de la API minimiza el riesgo de errores humanos al eliminar la necesidad de escribir y transcribir información a mano. Esto asegura una mayor precisión en los datos y en los reportes generados.
+
+5. **Escalabilidad**: El sistema es escalable, permitiendo la inclusión de más técnicos, materiales y reportes sin complicaciones, lo que es crucial a medida que la empresa crece.
+
+6. **Mejora en la eficiencia operativa**: Al automatizar las tareas repetitivas y tediosas, los técnicos y administradores pueden centrarse en tareas de mayor valor, mejorando la productividad general.
+
+#### Funcionalidad
+
+- **Autenticación y Roles**: El sistema permite la creación de usuarios con distintos roles (Administrador, Técnico), asegurando que solo los usuarios autorizados accedan a ciertas funciones.
+  
+- **Gestión de Inventarios**: Los administradores pueden agregar, actualizar y eliminar materiales, mientras que los técnicos tienen acceso solo a los materiales que se les asignan para su uso diario.
+
+- **Reportes Detallados**: Los reportes permiten ver el uso de materiales por parte de cada técnico en tiempo real, ayudando al gerente a identificar qué materiales se han utilizado y cuánto queda disponible, lo que facilita la gestión del stock.
+
+- **Límites de Materiales**: Los técnicos tienen asignados límites diarios de materiales, lo que ayuda a evitar el mal uso o desperdicio de los recursos.
+
+#### Implementación
+
+La API está desarrollada utilizando **Node.js** y **MongoDB**. El sistema está diseñado para ser fácil de usar y de configurar en cualquier entorno local, permitiendo a las empresas instalar y poner en marcha el sistema con facilidad.
+
+**Requisitos:**
+- Node.js (versión 20 o superior)
+- MongoDB (base de datos local)
+- Postman o cualquier cliente HTTP para pruebas de la API.
+
+#### Conclusión
+
+Este proyecto es una solución eficiente y moderna para la gestión de materiales en empresas de telecomunicaciones, especialmente en aquellas que manejan equipos y técnicos sobre el terreno. Al optimizar el proceso de gestión de inventarios, la API contribuye a mejorar la productividad, reducir errores, y facilitar la toma de decisiones, lo que se traduce en una mejora general en la eficiencia operativa de la empresa.
+PROTOTIPO DEL PRODUCTO FINAL 
+Hecho con la herramienta en figma
+URL: https://www.figma.com/design/GHF65BnMoKCPNcgKnSnZyI/Untitled?node-id=20-2924&t=TcOCvlArfwenoeEb-1
 ## Requisitos
 - Node.js (versión 20 o superior).
 - MongoDB (local).
@@ -268,6 +320,18 @@ URL: http://localhost:5000/allusers
     }
 ]
 # 8. CREAR
+Metodo:POST
+URL: http://localhost:5000/allusers
+
 # 9 ELIIMNAR
+Metodo:DELETE
+URL: http://localhost:5000/allusers/:id
+
 # 10 ACTALIZAR
+Metodo:PUT
+URL: http://localhost:5000/allusers
+
+
 # 11 BUSCAR POR ID USUARIO
+Metodo:GET
+URL: http://localhost:5000/allusers/:id
